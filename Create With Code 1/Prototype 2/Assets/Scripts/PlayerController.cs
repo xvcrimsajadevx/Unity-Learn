@@ -34,5 +34,12 @@ public class PlayerController : MonoBehaviour
         {
             transform.position = new Vector3(xRange, transform.position.y, transform.position.y);
         }
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            // Launch projectile from the player
+
+            Debug.Log("Launch the Pizza!");
+        }
     }
 }
