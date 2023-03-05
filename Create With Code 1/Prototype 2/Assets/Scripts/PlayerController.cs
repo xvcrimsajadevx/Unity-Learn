@@ -38,8 +38,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             // Launch projectile from the player
-
-            Debug.Log("Launch the Pizza!");
+            Instantiate(projectilePrefab, transform.position, projectilePrefab.transform.rotation);
         }
     }
 }
