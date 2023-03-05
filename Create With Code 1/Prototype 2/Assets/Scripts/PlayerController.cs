@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    [SerializeField] private GameObject projectilePrefab;
+
     [SerializeField] private float speed = 10f;
     [SerializeField] private float xRange = 10f;
     public float horizontalInput;
