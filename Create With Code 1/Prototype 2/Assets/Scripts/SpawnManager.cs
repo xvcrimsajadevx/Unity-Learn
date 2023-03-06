@@ -19,6 +19,7 @@ public class SpawnManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.S))
         {
+            // Randomly generate animal index and spawn location
             int animalIndex = Random.Range(0, animalPrefabs.Length);
             Vector3 spawnPos = new Vector3(Random.Range(-spawnRangeX, spawnRangeX), 0, spawnPosY);
 
