@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    [SerializeField] private GameObject projectilePrefab;
+
     [SerializeField] private float speed = 10f;
     [SerializeField] private float xRange = 10f;
     public float horizontalInput;
@@ -31,6 +33,12 @@ public class PlayerController : MonoBehaviour
         else if (transform.position.x > xRange)
         {
             transform.position = new Vector3(xRange, transform.position.y, transform.position.y);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            // Launch projectile from the player
+            Instantiate(projectilePrefab, transform.position, projectilePrefab.transform.rotation);
         }
     }
 }
