@@ -156,6 +156,8 @@ MonoBehaviour:
   - {fileID: 5960189951996931163, guid: 0f9ebba98d549e54097af6491614ae51, type: 3}
   - {fileID: 4223745010303096892, guid: 919ea148bdb081c45ae8cb950c79853d, type: 3}
   - {fileID: 2858798354104433481, guid: 444b629746dd9c442a16117d32ae7d13, type: 3}
+  spawnRangeX: 20
+  spawnPosY: 20
 --- !u!4 &53392659
 Transform:
   m_ObjectHideFlags: 0
@@ -591,7 +593,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectilePrefab: {fileID: 8238468949032933283, guid: ccc9b9102ecb1e941bc1c13812638b05, type: 3}
   speed: 16
-  xRange: 16
+  xRange: 20
   horizontalInput: 0
 --- !u!1 &992285705
 GameObject:
