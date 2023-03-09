@@ -14,7 +14,7 @@ public class FollowPlayer : MonoBehaviour
     void Start()
     {
         // Sets action view camera on start
-        //currentCamera = Cameras[0];
+        currentCamera = Cameras[0];
     }
 
     // Update is called once per frame
