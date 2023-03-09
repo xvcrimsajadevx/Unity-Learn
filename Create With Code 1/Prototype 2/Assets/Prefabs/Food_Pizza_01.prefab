@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 8589085923223665628}
   m_Layer: 0
   m_Name: Food_Pizza_01
-  m_TagString: Untagged
+  m_TagString: Food
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -113,8 +113,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 786269b78ffd99e459a148d356d4f222, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  topBound: 30
-  lowerBound: -10
+  zBound: 15
+  xBound: 20
 --- !u!65 &6855174441930759074
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -10,8 +10,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float speed = 10f;
     [SerializeField] private float xRange = 10f;
     [SerializeField] private float zRange = 10f;
+
     public float horizontalInput;
     public float verticalInput;
+
+    private float pizzaCounter;
 
     // Start is called before the first frame update
     void Start()
@@ -22,6 +25,8 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void LateUpdate()
     {
+        pizzaCounter += Time.deltaTime;
+
         // Gets player input
         horizontalInput = Input.GetAxis("Horizontal");
         verticalInput = Input.GetAxis("Vertical");
@@ -51,8 +56,13 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            // Launch projectile from the player
-            Instantiate(projectilePrefab, transform.position, projectilePrefab.transform.rotation);
+            if (pizzaCounter >= 0.1f)
+            {
+                // Launch projectile from the player
+                Instantiate(projectilePrefab, transform.position, projectilePrefab.transform.rotation);
+
+                pizzaCounter = 0;
+            }
         }
     }
 }

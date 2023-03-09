@@ -18,7 +18,21 @@ public class DetectCollisions : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Destroy(gameObject);
-        Destroy(other.gameObject);
+        if (gameObject.tag == "Food" && other.gameObject.tag == "Animal")
+        {
+            Destroy(gameObject);
+            Destroy(other.gameObject);
+        }
+        else if (gameObject.tag == "Animal" && other.gameObject.tag == "Player")
+        {
+            Destroy(other.gameObject);
+
+            Debug.Log("Game Over!");
+        }
+        else
+        {
+            return;
+        }
+        
     }
 }
