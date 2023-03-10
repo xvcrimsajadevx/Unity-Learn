@@ -1088,7 +1088,6 @@ GameObject:
   - component: {fileID: 1867071452876269869}
   - component: {fileID: 1733162413549879187}
   - component: {fileID: -5313309435930097042}
-  - component: {fileID: -7137222456967949415}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -1149,6 +1148,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectilePrefab: {fileID: 8238468949032933283, guid: ccc9b9102ecb1e941bc1c13812638b05, type: 3}
+  playerCollider: {fileID: 1733162413549879187}
   speed: 16
   xRange: 16
   zRange: 9
@@ -1183,18 +1183,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &-7137222456967949415
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1867071452876369893}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3850fd6bff0fc3145b04ae9fb16671dd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1867071452876369901
 GameObject:
   m_ObjectHideFlags: 0

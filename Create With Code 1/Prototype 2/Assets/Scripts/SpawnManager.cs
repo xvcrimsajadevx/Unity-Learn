@@ -48,7 +48,6 @@ public class SpawnManager : MonoBehaviour
         else
         {
             spawnPos = spawnTop();
-
             newAnimalRotation = Quaternion.LookRotation(Vector3.back, Vector3.up);
         }
 

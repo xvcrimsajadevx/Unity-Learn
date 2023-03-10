@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -18,21 +19,12 @@ public class DetectCollisions : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (gameObject.tag == "Food" && other.gameObject.tag == "Animal")
+        if (other.gameObject.tag == "Animal")
         {
+            gameObject.GetComponentInParent<PlayerController>().FeedAnimal();
+
             Destroy(gameObject);
             Destroy(other.gameObject);
         }
-        else if (gameObject.tag == "Animal" && other.gameObject.tag == "Player")
-        {
-            Destroy(other.gameObject);
-
-            Debug.Log("Game Over!");
-        }
-        else
-        {
-            return;
-        }
-        
     }
 }
