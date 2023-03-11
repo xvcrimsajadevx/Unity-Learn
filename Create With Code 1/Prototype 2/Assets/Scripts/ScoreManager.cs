@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DetectCollisions : MonoBehaviour
+public class ScoreManager : MonoBehaviour
 {
+    private int score = 0;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        Debug.Log("Score: " + score);
     }
 
     // Update is called once per frame
@@ -16,9 +18,10 @@ public class DetectCollisions : MonoBehaviour
         
     }
 
-    private void OnTriggerEnter(Collider other)
+    public void ManageScore(int points)
     {
-        Destroy(gameObject);
-        Destroy(other.gameObject);
+        score += points;
+
+        Debug.Log("Score: " + score);
     }
 }
