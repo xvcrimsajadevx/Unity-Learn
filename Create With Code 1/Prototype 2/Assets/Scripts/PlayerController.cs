@@ -17,13 +17,11 @@ public class PlayerController : MonoBehaviour
 
     private float pizzaTimer;
 
-    private int score;
     private int lives = 3;
 
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log("Score: 0" + score);
         Debug.Log("Lives Remaining: " + lives);
     }
 
@@ -101,12 +99,5 @@ public class PlayerController : MonoBehaviour
                 Debug.Log("Game Over!");
             }
         }
-    }
-
-    public void FeedAnimal()
-    {
-        score++;
-
-        Debug.Log("Score: " + score);
     }
 }

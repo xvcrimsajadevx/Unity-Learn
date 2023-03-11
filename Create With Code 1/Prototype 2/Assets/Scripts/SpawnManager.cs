@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
 {
-    [SerializeField] private GameObject[] animalPrefabs;
+    [SerializeField] private GameObject[] AnimalPrefabs;
+    [SerializeField] private SpawnManager spawnManager;
+    [SerializeField] private ScoreManager scoreManager;
 
     [SerializeField] private float spawnRangeX = 15;
     [SerializeField] private float spawnRangeZ = 19;
@@ -12,11 +14,13 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] private float spawnPosX = 19;
 
     [SerializeField] private float startDelay = 2f;
+    [SerializeField] private float minSpawnLength = 0.5f;
+    [SerializeField] private float maxSpawnLength = 2f;
 
     // Start is called before the first frame update
     void Start()
     {
-        InvokeRepeating(nameof(SpawnRandomAnimal), startDelay, Random.Range(0.5f, 3f));
+        InvokeRepeating(nameof(SpawnRandomAnimal), startDelay, Random.Range(minSpawnLength, maxSpawnLength));
     }
 
     // Update is called once per frame
@@ -28,7 +32,8 @@ public class SpawnManager : MonoBehaviour
     private void SpawnRandomAnimal()
     {
         // Randomly generates animal index
-        int animalIndex = Random.Range(0, animalPrefabs.Length);
+        int animalIndex = Random.Range(0, AnimalPrefabs.Length);
+        GameObject animal = AnimalPrefabs[animalIndex];
 
         // Randomly generates spawn position
         int spawnLocation = Random.Range(0, 3);
@@ -51,7 +56,7 @@ public class SpawnManager : MonoBehaviour
             newAnimalRotation = Quaternion.LookRotation(Vector3.back, Vector3.up);
         }
 
-        Instantiate(animalPrefabs[animalIndex], spawnPos, newAnimalRotation);
+        Instantiate(animal, spawnPos, newAnimalRotation, spawnManager.transform);
     }
 
     private Vector3 spawnLeft()
