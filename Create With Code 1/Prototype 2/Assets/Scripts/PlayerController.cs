@@ -78,7 +78,7 @@ public class PlayerController : MonoBehaviour
                 // Launch projectile from the player
                 Instantiate(projectilePrefab, transform.position, projectilePrefab.transform.rotation, gameObject.transform);
 
-                pizzaTimer = 0;
+                pizzaTimer = 0f;
             }
         }
     }
