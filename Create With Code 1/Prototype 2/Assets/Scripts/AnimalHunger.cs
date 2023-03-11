@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Build.Content;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -18,7 +17,7 @@ public class AnimalHunger : MonoBehaviour
     {
         hungerSlider.maxValue = maxHunger;
         hungerSlider.value = currentHunger;
-        hungerSlider.fillRect.gameObject.SetActive(true);
+        hungerSlider.fillRect.gameObject.SetActive(false);
     }
 
     // Update is called once per frame

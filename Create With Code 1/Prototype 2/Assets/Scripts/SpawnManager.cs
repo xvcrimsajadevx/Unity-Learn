@@ -8,10 +8,10 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] private SpawnManager spawnManager;
     [SerializeField] private ScoreManager scoreManager;
 
-    [SerializeField] private float spawnRangeX = 15;
-    [SerializeField] private float spawnRangeZ = 19;
-    [SerializeField] private float spawnPosZ = 15;
-    [SerializeField] private float spawnPosX = 19;
+    [SerializeField] private float spawnRangeX = 15f;
+    [SerializeField] private float spawnRangeZ = 19f;
+    [SerializeField] private float spawnPosZ = 15f;
+    [SerializeField] private float spawnPosX = 19f;
 
     [SerializeField] private float startDelay = 2f;
     [SerializeField] private float minSpawnLength = 0.5f;
