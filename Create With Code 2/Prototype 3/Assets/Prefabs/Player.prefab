@@ -1714,6 +1714,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerRb: {fileID: 1156280812087937504}
+  jumpForce: 18
+  gravityModifier: 3.5
 --- !u!1 &210751173415839276
 GameObject:
   m_ObjectHideFlags: 0
