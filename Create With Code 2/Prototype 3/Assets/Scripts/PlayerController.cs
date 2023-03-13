@@ -32,6 +32,10 @@ public class PlayerController : MonoBehaviour
             isOnGround = false;
 
             animator.SetTrigger("Jump_trig");
+        }
+
+        if (!isOnGround || gameOver)
+        {
             dirtParticle.Stop();
         }
     }
@@ -54,7 +58,6 @@ public class PlayerController : MonoBehaviour
             animator.SetBool("Death_b", true);
 
             explosionParticle.Play();
-            dirtParticle.Stop();
         }
         
     }
