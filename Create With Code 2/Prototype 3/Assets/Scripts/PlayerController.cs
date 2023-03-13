@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Animator animator;
 
     [SerializeField] private ParticleSystem explosionParticle;
+    [SerializeField] private ParticleSystem dirtParticle;
 
     [SerializeField] private float jumpForce = 10.0f;
     [SerializeField] private float gravityModifier;
@@ -31,6 +32,7 @@ public class PlayerController : MonoBehaviour
             isOnGround = false;
 
             animator.SetTrigger("Jump_trig");
+            dirtParticle.Stop();
         }
     }
 
@@ -39,6 +41,7 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.CompareTag("Ground"))
         {
             isOnGround = true;
+            dirtParticle.Play();
         }
 
         if (collision.gameObject.CompareTag("Obstacle"))
@@ -51,6 +54,7 @@ public class PlayerController : MonoBehaviour
             animator.SetBool("Death_b", true);
 
             explosionParticle.Play();
+            dirtParticle.Stop();
         }
         
     }
