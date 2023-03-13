@@ -1714,6 +1714,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerRb: {fileID: 1156280812087937504}
+  animator: {fileID: 210751173423257064}
   jumpForce: 27
   gravityModifier: 2
 --- !u!1 &210751173415839276
