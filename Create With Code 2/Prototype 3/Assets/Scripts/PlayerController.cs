@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] private Rigidbody playerRb;
     [SerializeField] private Animator animator;
+    [SerializeField] private AudioSource audioSource;
 
     [SerializeField] private ParticleSystem explosionParticle;
     [SerializeField] private ParticleSystem dirtParticle;
@@ -35,6 +36,7 @@ public class PlayerController : MonoBehaviour
             isOnGround = false;
 
             animator.SetTrigger("Jump_trig");
+            audioSource.PlayOneShot(jumpSound, 0.4f);
         }
 
         if (!isOnGround || gameOver)
@@ -61,6 +63,7 @@ public class PlayerController : MonoBehaviour
             animator.SetBool("Death_b", true);
 
             explosionParticle.Play();
+            audioSource.PlayOneShot(crashSound, 1.0f);
         }
         
     }
