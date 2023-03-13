@@ -7,6 +7,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Rigidbody playerRb;
     [SerializeField] private Animator animator;
 
+    [SerializeField] private ParticleSystem explosionParticle;
+
     [SerializeField] private float jumpForce = 10.0f;
     [SerializeField] private float gravityModifier;
 
@@ -47,6 +49,8 @@ public class PlayerController : MonoBehaviour
 
             animator.SetInteger("DeathType_int", 1);
             animator.SetBool("Death_b", true);
+
+            explosionParticle.Play();
         }
         
     }
