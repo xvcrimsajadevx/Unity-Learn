@@ -5,17 +5,22 @@ using UnityEngine;
 public class PlayerControllerX : MonoBehaviour
 {
     public bool gameOver;
+    private bool isLowEnough;
+
 
     public float floatForce;
     private float gravityModifier = 1.5f;
-    private Rigidbody playerRb;
+    [SerializeField] private Rigidbody playerRb;
 
-    public ParticleSystem explosionParticle;
-    public ParticleSystem fireworksParticle;
+    [SerializeField] private ParticleSystem explosionParticle;
+    [SerializeField] private ParticleSystem fireworksParticle;
 
     private AudioSource playerAudio;
-    public AudioClip moneySound;
-    public AudioClip explodeSound;
+    [SerializeField] private AudioClip moneySound;
+    [SerializeField] private AudioClip explodeSound;
+    [SerializeField] private AudioClip groundSound;
+
+    [SerializeField] private float upperBound = 16.0f;
 
 
     // Start is called before the first frame update
@@ -25,17 +30,25 @@ public class PlayerControllerX : MonoBehaviour
         playerAudio = GetComponent<AudioSource>();
 
         // Apply a small upward force at the start of the game
-        playerRb.AddForce(Vector3.up * 5, ForceMode.Impulse);
-
+        playerRb.AddForce(Vector3.up * floatForce, ForceMode.Impulse);
     }
 
     // Update is called once per frame
     void Update()
     {
-        // While space is pressed and player is low enough, float up
-        if (Input.GetKey(KeyCode.Space) && !gameOver)
+        if (transform.position.y < upperBound)
         {
-            playerRb.AddForce(Vector3.up * floatForce);
+            isLowEnough = true;
+        }
+        else
+        {
+            isLowEnough = false;
+        }
+
+        // While space is pressed and player is low enough, float up
+        if (Input.GetKeyDown(KeyCode.Space) && !gameOver && isLowEnough)
+        {
+            playerRb.AddForce(Vector3.up * floatForce, ForceMode.Impulse);
         }
     }
 
@@ -60,6 +73,11 @@ public class PlayerControllerX : MonoBehaviour
 
         }
 
+        else if (other.gameObject.CompareTag("Ground"))
+        {
+            playerRb.AddForce(Vector3.up * floatForce, ForceMode.Impulse);
+            playerAudio.PlayOneShot(groundSound, 1.0f);
+        }
     }
 
 }
