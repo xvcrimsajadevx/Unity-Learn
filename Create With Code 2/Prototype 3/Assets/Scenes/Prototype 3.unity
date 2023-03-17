@@ -497,7 +497,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89566b288664e12449bd4b9572b8b689, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 28
+  speed: 18
   leftBound: -12
 --- !u!114 &835818923
 MonoBehaviour:
@@ -571,7 +571,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   obstaclePrefab: {fileID: 8220238597568385902, guid: dc4b2fb1e3b0ec348807b67b35c2bbcb, type: 3}
   startDelay: 2
-  repeatRate: 2
+  repeatRate: 1.8
 --- !u!1 &2014335011
 GameObject:
   m_ObjectHideFlags: 0
