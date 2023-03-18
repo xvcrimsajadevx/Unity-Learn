@@ -31,10 +31,12 @@ public class FollowPlayer : MonoBehaviour
     private void SwitchCamera()
     {
         // Switches between action view and personal view cameras
-        if (Input.GetButtonDown("SwitchCamera"))
+        if (Input.GetKeyDown(KeyCode.Tab))
         {
             if (currentCamera == Cameras[0])
             {
+                Player.GetComponent<PlayerController>().ControlFreezePlayer();
+
                 // Deactivates action view camera and turns on personal view camera
                 currentCamera.SetActive(false);
                 currentCamera = Cameras[1];
@@ -42,6 +44,8 @@ public class FollowPlayer : MonoBehaviour
             }
             else
             {
+                Player.GetComponent<PlayerController>().ControlFreezePlayer();
+
                 // Deactivates personal view camera and turns on action view camera
                 currentCamera.SetActive(false);
                 currentCamera = Cameras[0];
