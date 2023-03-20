@@ -30,6 +30,16 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        HandleJump();
+
+        if (!isOnGround || gameOver)
+        {
+            dirtParticle.Stop();
+        }
+    }
+
+    private void HandleJump()
+    {
         if (Input.GetKeyDown(KeyCode.Space) && !gameOver && !hasDoubleJumped)
         {
             if (isOnGround)
@@ -37,21 +47,19 @@ public class PlayerController : MonoBehaviour
                 playerRb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
 
                 isOnGround = false;
+
+                animator.SetTrigger("Jump_trig");
             }
             else if (!hasDoubleJumped)
             {
                 hasDoubleJumped = true;
 
                 playerRb.AddForce(Vector3.up * jumpForce * 0.7f, ForceMode.Impulse);
+
+                animator.Play("Running_Jump", -1, 0f);
             }
 
-            animator.SetTrigger("Jump_trig");
             audioSource.PlayOneShot(jumpSound, 0.4f);
-        }
-
-        if (!isOnGround || gameOver)
-        {
-            dirtParticle.Stop();
         }
     }
 
