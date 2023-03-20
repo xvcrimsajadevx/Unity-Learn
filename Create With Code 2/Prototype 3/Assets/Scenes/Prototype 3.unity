@@ -571,7 +571,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   obstaclePrefab: {fileID: 8220238597568385902, guid: dc4b2fb1e3b0ec348807b67b35c2bbcb, type: 3}
   startDelay: 2
-  repeatRate: 1.8
+  repeatRate: 5
 --- !u!1 &2014335011
 GameObject:
   m_ObjectHideFlags: 0
@@ -723,6 +723,10 @@ PrefabInstance:
     - target: {fileID: 210751173416008200, guid: 3b576207f2f093647a66e4fe65d99c4a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7137246834944907333, guid: 3b576207f2f093647a66e4fe65d99c4a, type: 3}
+      propertyPath: jumpForce
+      value: 700
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3b576207f2f093647a66e4fe65d99c4a, type: 3}

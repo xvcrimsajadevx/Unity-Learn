@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float gravityModifier;
 
     private bool isOnGround = true;
+    private bool hasDoubleJumped;
     public bool gameOver {  get; private set; }
 
     // Start is called before the first frame update
@@ -29,11 +30,20 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && isOnGround && !gameOver)
+        if (Input.GetKeyDown(KeyCode.Space) && !gameOver && !hasDoubleJumped)
         {
-            playerRb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            if (isOnGround)
+            {
+                playerRb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
 
-            isOnGround = false;
+                isOnGround = false;
+            }
+            else if (!hasDoubleJumped)
+            {
+                hasDoubleJumped = true;
+
+                playerRb.AddForce(Vector3.up * jumpForce * 0.7f, ForceMode.Impulse);
+            }
 
             animator.SetTrigger("Jump_trig");
             audioSource.PlayOneShot(jumpSound, 0.4f);
@@ -50,6 +60,7 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.CompareTag("Ground"))
         {
             isOnGround = true;
+            hasDoubleJumped = false;
             dirtParticle.Play();
         }
 
