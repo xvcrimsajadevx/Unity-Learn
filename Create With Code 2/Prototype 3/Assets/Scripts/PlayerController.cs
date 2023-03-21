@@ -18,7 +18,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float gravityModifier;
 
     private bool isOnGround = true;
-    public bool gameOver {  get; private set; }
+    private bool hasDoubleJumped;
+
+    public bool isDoubleSpeed;
+    public bool gameOver;
 
     // Start is called before the first frame update
     void Start()
@@ -29,19 +32,51 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && isOnGround && !gameOver)
+        HandleJump();
+        DisplayDirt();
+
+        if (Input.GetKey(KeyCode.B))
         {
-            playerRb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-
-            isOnGround = false;
-
-            animator.SetTrigger("Jump_trig");
-            audioSource.PlayOneShot(jumpSound, 0.4f);
+            isDoubleSpeed = true;
+            animator.SetFloat("Speed_Multiplier", 2);
         }
+        else
+        {
+            isDoubleSpeed = false;
+            animator.SetFloat("Speed_Multiplier", 1);
+        }
+    }
 
+    private void DisplayDirt()
+    {
         if (!isOnGround || gameOver)
         {
             dirtParticle.Stop();
+        }
+    }
+
+    private void HandleJump()
+    {
+        if (Input.GetKeyDown(KeyCode.Space) && !gameOver && !hasDoubleJumped)
+        {
+            if (isOnGround)
+            {
+                playerRb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+
+                isOnGround = false;
+
+                animator.SetTrigger("Jump_trig");
+            }
+            else if (!hasDoubleJumped)
+            {
+                hasDoubleJumped = true;
+
+                playerRb.AddForce(Vector3.up * jumpForce * 0.7f, ForceMode.Impulse);
+
+                animator.Play("Running_Jump", -1, 0f);
+            }
+
+            audioSource.PlayOneShot(jumpSound, 0.4f);
         }
     }
 
@@ -50,21 +85,24 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.CompareTag("Ground"))
         {
             isOnGround = true;
+            hasDoubleJumped = false;
             dirtParticle.Play();
         }
 
         if (collision.gameObject.CompareTag("Obstacle"))
         {
-            gameOver = true;
+            if (!gameOver)
+            {
+                gameOver = true;
 
-            Debug.Log("gameOver");
+                Debug.Log("gameOver");
 
-            animator.SetInteger("DeathType_int", 1);
-            animator.SetBool("Death_b", true);
+                animator.SetInteger("DeathType_int", 1);
+                animator.SetBool("Death_b", true);
 
-            explosionParticle.Play();
-            audioSource.PlayOneShot(crashSound, 1.0f);
+                explosionParticle.Play();
+                audioSource.PlayOneShot(crashSound, 1.0f);
+            }
         }
-        
     }
 }
