@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private Rigidbody playerRb;
+    [SerializeField] private GameObject focalPoint;
 
     [SerializeField] private float speed = 5f;
 
@@ -19,6 +20,6 @@ public class PlayerController : MonoBehaviour
     {
         float forwardInput = Input.GetAxis("Vertical");
 
-        playerRb.AddForce(Vector3.forward * forwardInput * speed);
+        playerRb.AddForce(focalPoint.transform.forward * forwardInput * speed);
     }
 }
