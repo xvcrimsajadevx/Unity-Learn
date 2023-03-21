@@ -9,6 +9,7 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] private float startDelay = 2f;
     [SerializeField] private float repeatRate = 2f;
 
+
     private Vector3 spawnPos = new Vector3(25, 0, 0);
     private PlayerController playerController;
 
@@ -23,7 +24,7 @@ public class SpawnManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     private void SpawnObstacle()

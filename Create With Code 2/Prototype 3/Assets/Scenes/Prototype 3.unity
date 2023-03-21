@@ -217,6 +217,52 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1 &208575796
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 208575797}
+  - component: {fileID: 208575798}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &208575797
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 208575796}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2.760369, y: 6.775396, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &208575798
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 208575796}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44ec931b8b89e284f8a8eb60c60027b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerController: {fileID: 1309261742}
+  score: 0
 --- !u!1 &534669902
 GameObject:
   m_ObjectHideFlags: 0
@@ -525,6 +571,17 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 112.79999, y: 18.836718, z: 0.2}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1309261742 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7137246834944907333, guid: 3b576207f2f093647a66e4fe65d99c4a, type: 3}
+  m_PrefabInstance: {fileID: 210751173064559171}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c0aecb6202252d44affd5d583c091e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1672590187
 GameObject:
   m_ObjectHideFlags: 0
@@ -579,8 +636,8 @@ MonoBehaviour:
   - {fileID: 2681761972933227748, guid: fccca973adb8a1e4e94eb435683a8c1b, type: 3}
   - {fileID: 408777984335741216, guid: 21869844b2ee84640aaf816a5c438e11, type: 3}
   - {fileID: 3935603566468110246, guid: 2f9f00450a1d1b74f83ed4f5678322bf, type: 3}
-  startDelay: 2
-  repeatRate: 2
+  startDelay: 1.8
+  repeatRate: 1.2
 --- !u!1 &2014335011
 GameObject:
   m_ObjectHideFlags: 0

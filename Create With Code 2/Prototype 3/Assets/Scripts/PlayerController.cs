@@ -19,6 +19,8 @@ public class PlayerController : MonoBehaviour
 
     private bool isOnGround = true;
     private bool hasDoubleJumped;
+
+    public bool isDoubleSpeed;
     public bool gameOver {  get; private set; }
 
     // Start is called before the first frame update
@@ -31,7 +33,22 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         HandleJump();
+        DisplayDirt();
 
+        if (Input.GetKey(KeyCode.B))
+        {
+            isDoubleSpeed = true;
+            animator.SetFloat("Speed_Multiplier", 2);
+        }
+        else
+        {
+            isDoubleSpeed = false;
+            animator.SetFloat("Speed_Multiplier", 1);
+        }
+    }
+
+    private void DisplayDirt()
+    {
         if (!isOnGround || gameOver)
         {
             dirtParticle.Stop();
@@ -74,16 +91,18 @@ public class PlayerController : MonoBehaviour
 
         if (collision.gameObject.CompareTag("Obstacle"))
         {
-            gameOver = true;
+            if (!gameOver)
+            {
+                gameOver = true;
 
-            Debug.Log("gameOver");
+                Debug.Log("gameOver");
 
-            animator.SetInteger("DeathType_int", 1);
-            animator.SetBool("Death_b", true);
+                animator.SetInteger("DeathType_int", 1);
+                animator.SetBool("Death_b", true);
 
-            explosionParticle.Play();
-            audioSource.PlayOneShot(crashSound, 1.0f);
+                explosionParticle.Play();
+                audioSource.PlayOneShot(crashSound, 1.0f);
+            }
         }
-        
     }
 }
