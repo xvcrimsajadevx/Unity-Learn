@@ -483,7 +483,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &835818922
 MonoBehaviour:
@@ -569,9 +569,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11ee53dd23c58754e95a5667a5b14683, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  obstaclePrefab: {fileID: 8220238597568385902, guid: dc4b2fb1e3b0ec348807b67b35c2bbcb, type: 3}
+  ObstaclePrefabs:
+  - {fileID: 8220238597568385902, guid: dc4b2fb1e3b0ec348807b67b35c2bbcb, type: 3}
+  - {fileID: 3548559770947285643, guid: 758d587722d0ef147aed0067ed56e8dc, type: 3}
+  - {fileID: 8180976251131441474, guid: e6fc0612eeb7bd746a25344cd7fee564, type: 3}
+  - {fileID: 277421234208234048, guid: 6df6de13bd1201e43b66133cac38ef54, type: 3}
+  - {fileID: 782041456473608873, guid: 03866d719ac3885428da84cb03e0d4e4, type: 3}
+  - {fileID: 5659935809676467161, guid: 2aadf6ecaaaeae143b5961899167147e, type: 3}
+  - {fileID: 2681761972933227748, guid: fccca973adb8a1e4e94eb435683a8c1b, type: 3}
+  - {fileID: 408777984335741216, guid: 21869844b2ee84640aaf816a5c438e11, type: 3}
+  - {fileID: 3935603566468110246, guid: 2f9f00450a1d1b74f83ed4f5678322bf, type: 3}
   startDelay: 2
-  repeatRate: 5
+  repeatRate: 2
 --- !u!1 &2014335011
 GameObject:
   m_ObjectHideFlags: 0
@@ -602,8 +611,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 10, y: 2.220446e-16, z: 10}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 10, y: 0, z: 10}
+  m_Center: {x: 0, y: 1.110223e-16, z: 0}
 --- !u!23 &2014335013
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -682,7 +691,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 210751173416008200, guid: 3b576207f2f093647a66e4fe65d99c4a, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 210751173416008200, guid: 3b576207f2f093647a66e4fe65d99c4a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -723,10 +732,6 @@ PrefabInstance:
     - target: {fileID: 210751173416008200, guid: 3b576207f2f093647a66e4fe65d99c4a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7137246834944907333, guid: 3b576207f2f093647a66e4fe65d99c4a, type: 3}
-      propertyPath: jumpForce
-      value: 700
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3b576207f2f093647a66e4fe65d99c4a, type: 3}
