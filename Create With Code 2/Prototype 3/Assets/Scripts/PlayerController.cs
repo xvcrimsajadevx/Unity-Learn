@@ -21,7 +21,7 @@ public class PlayerController : MonoBehaviour
     private bool hasDoubleJumped;
 
     public bool isDoubleSpeed;
-    public bool gameOver {  get; private set; }
+    public bool gameOver;
 
     // Start is called before the first frame update
     void Start()
