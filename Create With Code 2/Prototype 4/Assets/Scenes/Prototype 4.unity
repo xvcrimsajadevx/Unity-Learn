@@ -213,6 +213,7 @@ GameObject:
   - component: {fileID: 256320730}
   - component: {fileID: 256320729}
   - component: {fileID: 256320733}
+  - component: {fileID: 256320734}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -314,6 +315,21 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &256320734
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 256320728}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 907d8494de8b0604b8f5a8044401ba02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyRb: {fileID: 256320733}
+  player: {fileID: 1777317812}
+  speed: 3
 --- !u!1 &1158169114
 GameObject:
   m_ObjectHideFlags: 0
@@ -626,6 +642,11 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: 8878a37eb67ddac4ead51890a31d6a18, type: 3}
+--- !u!1 &1777317812 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 868796662320764576, guid: 863a3b9bf73b488419229b3a4b6c7515, type: 3}
+  m_PrefabInstance: {fileID: 868796664041906452}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &868796664041906452
 PrefabInstance:
   m_ObjectHideFlags: 0
