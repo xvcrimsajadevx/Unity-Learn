@@ -4,14 +4,15 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    [SerializeField] private Rigidbody enemyRb;
-    [SerializeField] private GameObject player;
+    private Rigidbody enemyRb;
+    private GameObject player;
 
     [SerializeField] private float speed = 3f;
     // Start is called before the first frame update
     void Start()
     {
-        
+        enemyRb = GetComponent<Rigidbody>();
+        player = GameObject.Find("Player");
     }
 
     // Update is called once per frame
