@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 1777317818}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -93,7 +93,7 @@ SphereCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 868796662320764576}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 786a57a8d86d41445892b48f8b0fc3ab, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -128,4 +128,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerRb: {fileID: 868796662320764577}
+  focalPoint: {fileID: 0}
+  powerupIndicator: {fileID: 0}
   speed: 5
+  powerupStrength: 10
