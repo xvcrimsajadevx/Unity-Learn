@@ -7,6 +7,8 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] private GameObject enemyPrefab;
     [SerializeField] private float spawnRange = 90.0f;
 
+    public int enemyCount;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -16,7 +18,12 @@ public class SpawnManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        enemyCount = FindObjectsOfType<Enemy>().Length;
+
+        if (enemyCount == 0 )
+        {
+            SpawnEnemyWave(1);
+        }
     }
 
     private void SpawnEnemyWave(int enemiesToSpawn)
