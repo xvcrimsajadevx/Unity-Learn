@@ -30,6 +30,13 @@ public class PlayerController : MonoBehaviour
         powerupIndicator.transform.position = transform.position + new Vector3(0f, -0.53f, 0f);
     }
 
+    IEnumerator PowerupCountdownRoutine()
+    {
+        yield return new WaitForSeconds(7);
+        hasPowerup = false;
+        powerupIndicator.SetActive(hasPowerup);
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Powerup"))
@@ -40,13 +47,6 @@ public class PlayerController : MonoBehaviour
 
             StartCoroutine(PowerupCountdownRoutine());
         }
-    }
-
-    IEnumerator PowerupCountdownRoutine()
-    {
-        yield return new WaitForSeconds(7);
-        hasPowerup = false;
-        powerupIndicator.SetActive(hasPowerup);
     }
 
     private void OnCollisionEnter(Collision collision)
