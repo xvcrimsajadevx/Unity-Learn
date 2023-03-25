@@ -11,9 +11,11 @@ public class SpawnManagerX : MonoBehaviour
     private float spawnZMin = 15; // set min spawn Z
     private float spawnZMax = 25; // set max spawn Z
 
+    private float speedIncrement = 0;
+
+    private GameObject[] enemies;
     public int enemyCount;
     public int waveCount = 1;
-
 
     public GameObject player; 
 
@@ -24,7 +26,20 @@ public class SpawnManagerX : MonoBehaviour
 
         if (enemyCount == 0)
         {
+            speedIncrement += 10;
             SpawnEnemyWave(waveCount);
+
+            GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+
+            if (enemies.Length == 1)
+            {
+                speedIncrement = 0;
+            }
+
+            foreach (GameObject enemy in enemies)
+            {
+                enemy.GetComponent<EnemyX>().speed += speedIncrement;
+            }
         }
 
     }
@@ -45,7 +60,6 @@ public class SpawnManagerX : MonoBehaviour
         // If no powerups remain, spawn a powerup
         if (GameObject.FindGameObjectsWithTag("Powerup").Length == 0) // check that there are zero powerups
         {
-            
             Instantiate(powerupPrefab, GenerateSpawnPosition() + powerupSpawnOffset, powerupPrefab.transform.rotation);
         }
 
