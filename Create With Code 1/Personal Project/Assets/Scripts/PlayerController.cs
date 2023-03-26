@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 
@@ -90,12 +91,8 @@ public class PlayerController : MonoBehaviour
         else if (smashCounter > smashHangTime && isInGroundSmash)
         {
             playerRb.AddForce(Vector3.down * dashForce, ForceMode.Impulse);
-        }
 
-        if(isOnGround)
-        {
-            isInGroundSmash = false;
-            FixGravity();
+            
         }
     }
 
@@ -179,11 +176,18 @@ public class PlayerController : MonoBehaviour
 
         if (collision.gameObject.CompareTag("Ground") && isInGroundSmash)
         {
-            isOnGround = true;
-            isInGroundSmash = false;
+            float impactForce = 30f;
 
             playerRb.velocity = Vector3.zero;
-            playerRb.AddForce(Vector3.up * 5, ForceMode.Impulse);
+
+            transform.position = new Vector3(transform.position.x, collision.transform.position.y + 1, transform.position.z);
+
+            isInGroundSmash = false;
+
+            if (!isInGroundSmash && isOnGround)
+            {
+                playerRb.AddForce(Vector3.up * impactForce, ForceMode.Impulse);
+            }
         }
     }
 
