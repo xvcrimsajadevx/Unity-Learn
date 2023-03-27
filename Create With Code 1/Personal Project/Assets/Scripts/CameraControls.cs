@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class FollowPlayer : MonoBehaviour
+public class CameraControls : MonoBehaviour
 {
     [SerializeField] private GameObject Player;
     [SerializeField] private GameObject[] Cameras;
+    [SerializeField] private GameObject cameraFocus;
+
+    [SerializeField] private float rotationSpeed;
 
     private GameObject currentCamera;
 
@@ -20,12 +23,16 @@ public class FollowPlayer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        CameraNullCheck();
+        float horizontalInput = Input.GetAxisRaw("CameraHorizontal");
+
+        SetDefaultCamera();
 
         SwitchCamera();
 
         // Offsets camera behind the player by adding to player's position
         transform.position = Player.transform.position;
+
+        cameraFocus.transform.Rotate(Vector3.up, horizontalInput * rotationSpeed * Time.deltaTime);
     }
 
     private void SwitchCamera()
@@ -54,7 +61,7 @@ public class FollowPlayer : MonoBehaviour
         }
     }
 
-    private void CameraNullCheck()
+    private void SetDefaultCamera()
     {
         // Activates action view camera if current camera is null
         if (currentCamera == null)

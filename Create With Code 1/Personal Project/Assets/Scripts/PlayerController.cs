@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     // References to player components
     [SerializeField] private Rigidbody playerRb;
     [SerializeField] private CapsuleCollider playerCollider;
+    [SerializeField] private GameObject focalPoint;
 
     // Gameplay variables
     [SerializeField] private float speed = 10.0f;
@@ -126,8 +127,8 @@ public class PlayerController : MonoBehaviour
     private void MovePlayer(float horizontalInput, float verticalInput) 
     {
         // Moves player according to axis Input
-        transform.Translate(Vector3.right * horizontalInput * Time.deltaTime * speed);
-        transform.Translate(Vector3.forward * verticalInput * Time.deltaTime * speed);
+        transform.Translate(focalPoint.transform.right * horizontalInput * Time.deltaTime * speed);
+        transform.Translate(focalPoint.transform.forward * verticalInput * Time.deltaTime * speed);
     }
 
     private void HandlePlayerJump() 
