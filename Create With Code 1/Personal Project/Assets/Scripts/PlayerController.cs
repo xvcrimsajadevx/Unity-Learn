@@ -172,23 +172,28 @@ public class PlayerController : MonoBehaviour
             isOnGround = true;
             hasDoubleJumped = false;
             hasAirDashed = false;
-        }
 
-        if (collision.gameObject.CompareTag("Ground") && isInGroundSmash)
-        {
-            float impactForce = 30f;
-
-            playerRb.velocity = Vector3.zero;
-
-            transform.position = new Vector3(transform.position.x, collision.transform.position.y + 1, transform.position.z);
-
-            isInGroundSmash = false;
-
-            if (!isInGroundSmash && isOnGround)
+            if (isInGroundSmash)
             {
-                playerRb.AddForce(Vector3.up * impactForce, ForceMode.Impulse);
+                transform.position = new Vector3(transform.position.x, collision.transform.position.y + 1, transform.position.z);
+
+                if (collision.gameObject.name == "Ground")
+                {
+                    float impactForce = 30f;
+
+                    playerRb.velocity = Vector3.zero;
+                    transform.position = new Vector3(transform.position.x, collision.transform.position.y + 1, transform.position.z);
+
+                    isInGroundSmash = false;
+
+                    if (!isInGroundSmash && isOnGround)
+                    {
+                        playerRb.AddForce(Vector3.up * impactForce, ForceMode.Impulse);
+                    }
+                } 
             }
         }
+
     }
 
     public void ControlFreezePlayer()
