@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     // References to player components
     [SerializeField] private Rigidbody playerRb;
     [SerializeField] private CapsuleCollider playerCollider;
+    [SerializeField] private GameObject cameraFocus;
 
     // Gameplay variables
     [SerializeField] private float speed = 10.0f;
@@ -64,14 +65,17 @@ public class PlayerController : MonoBehaviour
         }
 
         KeepPlayerInBounds();
-        
+        FixGravity();
     }
 
     private void FixGravity()
     {
         if (!isDashing && !isInGroundSmash)
         {
-            playerRb.useGravity = true;
+            if (!playerRb.useGravity)
+            {
+                playerRb.useGravity = true;
+            }
         }
     }
 
@@ -90,9 +94,7 @@ public class PlayerController : MonoBehaviour
         }
         else if (smashCounter > smashHangTime && isInGroundSmash)
         {
-            playerRb.AddForce(Vector3.down * dashForce, ForceMode.Impulse);
-
-            
+            playerRb.AddForce(Vector3.down * dashForce, ForceMode.Impulse);  
         }
     }
 
@@ -119,15 +121,13 @@ public class PlayerController : MonoBehaviour
         {
             isDashing = false;
         }
-
-        FixGravity();
     }
 
     private void MovePlayer(float horizontalInput, float verticalInput) 
     {
         // Moves player according to axis Input
-        transform.Translate(Vector3.right * horizontalInput * Time.deltaTime * speed);
-        transform.Translate(Vector3.forward * verticalInput * Time.deltaTime * speed);
+        transform.Translate(cameraFocus.transform.right * horizontalInput * Time.deltaTime * speed);
+        transform.Translate(cameraFocus.transform.forward * verticalInput * Time.deltaTime * speed);
     }
 
     private void HandlePlayerJump() 
