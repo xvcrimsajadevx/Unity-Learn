@@ -1,7 +1,5 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 
@@ -24,24 +22,21 @@ public class PlayerController : MonoBehaviour
 
     //Gameplay booleans
     private bool isOnGround;
-    private bool isDashing;
     private bool isInGroundSmash;
     private bool hasDoubleJumped;
     private bool hasAirDashed;
     private bool canMove;
 
-    private float dashCounter;
-    private float dashHangTime = 0.3f;
-    private float dashCooldown = 0.6f;
-
-    private float smashCounter;
-    private float smashHangTime = 0.3f;
+    private int dashCount;
+    private bool canDash;
+    
 
     // Start is called before the first frame update
     void Start()
     {
         Physics.gravity *= gravityModifier;
         canMove = true;
+        canDash = true;
     }
 
     // Update is called once per frame
@@ -52,10 +47,6 @@ public class PlayerController : MonoBehaviour
         float verticalInput = Input.GetAxis("Vertical");
 
         Vector3 movement = new Vector3(horizontalInput, 0f, verticalInput);
-
-        // Counter ticks
-        dashCounter += Time.deltaTime;
-        smashCounter += Time.deltaTime;
 
         if (canMove)
         {
@@ -69,7 +60,6 @@ public class PlayerController : MonoBehaviour
         }
 
         KeepPlayerInBounds();
-        FixGravity();
     }
 
     // ================================== | Gameplay Methods | ================================== //
@@ -93,43 +83,52 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.N) && !isOnGround)
         {
-            smashCounter = 0;
-            isInGroundSmash = true;
-
-            if (smashCounter < smashHangTime && isInGroundSmash)
+            if (!isInGroundSmash)
             {
+                isInGroundSmash = true;
+
                 playerRb.useGravity = false;
                 playerRb.velocity = Vector3.zero;
+
+                StartCoroutine(HangtimeCooldown(.3f));
             }
         }
-        else if (smashCounter > smashHangTime && isInGroundSmash)
+
+        if (isInGroundSmash && playerRb.useGravity)
         {
-            playerRb.AddForce(Vector3.down * dashForce, ForceMode.Impulse);  
+            playerRb.AddForce(Vector3.down * dashForce, ForceMode.Impulse);
         }
     }
 
     private void HandlePlayerDash()
     {
-        if (Input.GetKeyDown(KeyCode.B) && dashCounter > dashCooldown)
+        if (Input.GetKeyDown(KeyCode.B))
         {
-            dashCounter = 0;
-            isDashing = true;
-
-            if (!isOnGround && !hasAirDashed)
+            if (dashCount < 3 && canDash)
             {
-                playerRb.useGravity = false;
+                dashCount++;
 
-                playerRb.velocity = Vector3.zero;
+                StartCoroutine(DashCooldown());
 
-                hasAirDashed = true;
-                hasDoubleJumped = true;
+                if (!isOnGround && !hasAirDashed)
+                {
+                    playerRb.useGravity = false;
+
+                    playerRb.velocity = Vector3.zero;
+
+                    canDash = false;
+                    hasAirDashed = true;
+                    hasDoubleJumped = true;
+
+                    StartCoroutine(DashLengthCooldown(2f));
+                }
+                else
+                {
+                    canDash = false;
+
+                    StartCoroutine(DashLengthCooldown(.6f));
+                }
             }
-
-            playerRb.AddForce(playerAvatar.transform.forward * dashForce, ForceMode.VelocityChange);
-        }
-        else if (dashCounter > dashHangTime)
-        {
-            isDashing = false;
         }
     }
 
@@ -144,9 +143,12 @@ public class PlayerController : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.Space) && !isOnGround && !hasDoubleJumped)
         {
             // Adds second jump in air if player hasn't already double-jumped
+            playerRb.useGravity = false;
             playerRb.velocity = Vector3.zero;
 
-            playerRb.AddForce(Vector3.up * jumpForce * 0.8f, ForceMode.Impulse);
+            StartCoroutine(HangtimeCooldown(.1f));
+
+            playerRb.AddForce(Vector3.up * jumpForce * 0.7f, ForceMode.Impulse);
             hasDoubleJumped = true;
         }
     }
@@ -174,15 +176,34 @@ public class PlayerController : MonoBehaviour
             transform.position = new Vector3(transform.position.x, transform.position.y, -areaBound); }
     }
 
-    private void FixGravity()
+    // ============================= | Timers and Cooldowns | ============================= //
+
+    IEnumerator DashLengthCooldown(float waitTime)
     {
-        if (!isDashing && !isInGroundSmash)
+        if (!playerRb.useGravity)
         {
-            if (!playerRb.useGravity)
-            {
-                playerRb.useGravity = true;
-            }
+            StartCoroutine(HangtimeCooldown(.3f));
         }
+
+        playerRb.AddForce(playerAvatar.transform.forward * dashForce, ForceMode.VelocityChange);
+
+        yield return new WaitForSeconds(waitTime);
+
+        canDash = true;
+    }
+
+    IEnumerator DashCooldown()
+    {
+        yield return new WaitForSeconds(4f);
+
+        dashCount--;
+    }
+
+    IEnumerator HangtimeCooldown(float waitTime)
+    {
+        yield return new WaitForSeconds(waitTime);
+
+        playerRb.useGravity = true;
     }
 
     // ============================= | Collisions and Feedback | ============================= //
@@ -216,10 +237,5 @@ public class PlayerController : MonoBehaviour
                 } 
             }
         }
-
-    }
-
-    
-
-    
+    } 
 }
