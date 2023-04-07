@@ -29,10 +29,9 @@ public class CameraControls : MonoBehaviour
         SwitchCamera();
 
         // Offsets camera behind the player by adding to player's position
-        transform.position = Player.transform.position;
+        transform.position = cameraFocus.transform.position;
         transform.LookAt(cameraFocus.transform.position);
         RotateCamera();
-
     }
 
     private void RotateCamera()
