@@ -10,9 +10,12 @@ public class PlayerController : MonoBehaviour
     // References to player components
     [SerializeField] private Rigidbody playerRb;
     [SerializeField] private CapsuleCollider playerCollider;
+    [SerializeField] private GameObject cameraFocus;
+    [SerializeField] private GameObject playerAvatar;
 
     // Gameplay variables
     [SerializeField] private float speed = 10.0f;
+    [SerializeField] private float turnSpeed = 20f;
     [SerializeField] private float jumpForce = 7.0f;
     [SerializeField] private float dashForce = 12.0f;
     [SerializeField] private float gravityModifier = 1.5f;
@@ -29,7 +32,7 @@ public class PlayerController : MonoBehaviour
 
     private float dashCounter;
     private float dashHangTime = 0.3f;
-    private float dashCooldown = 0.8f;
+    private float dashCooldown = 0.6f;
 
     private float smashCounter;
     private float smashHangTime = 0.3f;
@@ -48,6 +51,8 @@ public class PlayerController : MonoBehaviour
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
 
+        Vector3 movement = new Vector3(horizontalInput, 0f, verticalInput);
+
         // Counter ticks
         dashCounter += Time.deltaTime;
         smashCounter += Time.deltaTime;
@@ -55,7 +60,7 @@ public class PlayerController : MonoBehaviour
         if (canMove)
         {
             // Basic Movement
-            MovePlayer(horizontalInput, verticalInput);
+            MovePlayer(horizontalInput, verticalInput, movement);
 
             // Advanced Movement
             HandlePlayerJump();
@@ -64,14 +69,23 @@ public class PlayerController : MonoBehaviour
         }
 
         KeepPlayerInBounds();
-        
+        FixGravity();
     }
 
-    private void FixGravity()
+    // ================================== | Gameplay Methods | ================================== //
+
+    private void MovePlayer(float horizontalInput, float verticalInput, Vector3 movement)
     {
-        if (!isDashing && !isInGroundSmash)
+        // Moves player according to axis Input
+        transform.Translate(cameraFocus.transform.right * horizontalInput * Time.deltaTime * speed);
+        transform.Translate(cameraFocus.transform.forward * verticalInput * Time.deltaTime * speed);
+
+        if (movement.magnitude > 0)
         {
-            playerRb.useGravity = true;
+            Quaternion cameraForward = Quaternion.LookRotation(cameraFocus.transform.forward);
+            Quaternion moveRotation = Quaternion.LookRotation(movement);
+
+            playerAvatar.transform.rotation = Quaternion.Slerp(playerAvatar.transform.rotation, cameraForward * moveRotation, Time.deltaTime * turnSpeed);
         }
     }
 
@@ -90,9 +104,7 @@ public class PlayerController : MonoBehaviour
         }
         else if (smashCounter > smashHangTime && isInGroundSmash)
         {
-            playerRb.AddForce(Vector3.down * dashForce, ForceMode.Impulse);
-
-            
+            playerRb.AddForce(Vector3.down * dashForce, ForceMode.Impulse);  
         }
     }
 
@@ -113,21 +125,12 @@ public class PlayerController : MonoBehaviour
                 hasDoubleJumped = true;
             }
 
-            playerRb.AddForce(Vector3.forward * dashForce, ForceMode.VelocityChange);
+            playerRb.AddForce(playerAvatar.transform.forward * dashForce, ForceMode.VelocityChange);
         }
         else if (dashCounter > dashHangTime)
         {
             isDashing = false;
         }
-
-        FixGravity();
-    }
-
-    private void MovePlayer(float horizontalInput, float verticalInput) 
-    {
-        // Moves player according to axis Input
-        transform.Translate(Vector3.right * horizontalInput * Time.deltaTime * speed);
-        transform.Translate(Vector3.forward * verticalInput * Time.deltaTime * speed);
     }
 
     private void HandlePlayerJump() 
@@ -143,9 +146,16 @@ public class PlayerController : MonoBehaviour
             // Adds second jump in air if player hasn't already double-jumped
             playerRb.velocity = Vector3.zero;
 
-            playerRb.AddForce(Vector3.up * jumpForce * 0.7f, ForceMode.Impulse);
+            playerRb.AddForce(Vector3.up * jumpForce * 0.8f, ForceMode.Impulse);
             hasDoubleJumped = true;
         }
+    }
+
+    // ============================= | Restrictions and Controls | ============================= //
+
+    public void ControlFreezePlayer()
+    {
+        canMove = !canMove;
     }
 
     private void KeepPlayerInBounds()
@@ -163,6 +173,19 @@ public class PlayerController : MonoBehaviour
         if (transform.position.z < -areaBound) {
             transform.position = new Vector3(transform.position.x, transform.position.y, -areaBound); }
     }
+
+    private void FixGravity()
+    {
+        if (!isDashing && !isInGroundSmash)
+        {
+            if (!playerRb.useGravity)
+            {
+                playerRb.useGravity = true;
+            }
+        }
+    }
+
+    // ============================= | Collisions and Feedback | ============================= //
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -196,8 +219,7 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    public void ControlFreezePlayer()
-    {
-        canMove = !canMove;
-    }
+    
+
+    
 }
