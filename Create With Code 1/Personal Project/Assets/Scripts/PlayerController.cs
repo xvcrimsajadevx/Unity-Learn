@@ -237,5 +237,35 @@ public class PlayerController : MonoBehaviour
                 } 
             }
         }
-    } 
+
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            Debug.Log("Collided with Enemy");
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Recovery Item"))
+        {
+            Destroy(other.gameObject);
+        }
+
+        if (other.gameObject.CompareTag("Powerup"))
+        {
+            Destroy(other.gameObject);
+        }
+
+        if (other.gameObject.CompareTag("Pickup Item"))
+        {
+            Destroy(other.gameObject);
+        }
+
+        if (other.gameObject.CompareTag("Treasure Item"))
+        {
+            Destroy(other.gameObject);
+        }
+
+        Debug.Log("Collected " + other.gameObject.tag + ": " + other.gameObject.name);
+    }
 }
