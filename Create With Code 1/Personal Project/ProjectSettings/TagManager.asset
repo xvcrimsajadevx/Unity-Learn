@@ -8,10 +8,10 @@ TagManager:
   - Enemy
   - Powerup
   - Recovery Item
-  - Pickup Item
   - Treasure Item
   - Interactive
   - Pressure Plate
+  - Inventory Item
   layers:
   - Default
   - TransparentFX

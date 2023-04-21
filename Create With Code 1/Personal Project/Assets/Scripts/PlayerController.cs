@@ -11,7 +11,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private CapsuleCollider playerCollider;
     [SerializeField] private GameObject cameraFocus;
     [SerializeField] private GameObject playerAvatar;
-    [SerializeField] private SphereCollider interactRadius;
 
     // Gameplay variables
     [SerializeField] private float speed = 10.0f;
@@ -60,7 +59,7 @@ public class PlayerController : MonoBehaviour
             HandlePlayerJump();
             HandleGroundSmash();
             HandlePlayerDash();
-            HandlePlayerInteract();
+            //HandlePlayerInteract();
         }
 
         KeepPlayerInBounds();
@@ -136,22 +135,22 @@ public class PlayerController : MonoBehaviour
         }   
     }
 
-    private void HandlePlayerInteract()
-    {
-        if (interactables.Count == 0) { return; }
+    //private void HandlePlayerInteract()
+    //{
+    //    if (interactables.Count == 0) { return; }
 
-        if (Input.GetKeyDown(KeyCode.Slash))
-        {
-            interactRadius.GetComponent<SphereCollider>().enabled = true;
+    //    if (Input.GetKeyDown(KeyCode.Slash))
+    //    {
+    //        interactRadius.GetComponent<SphereCollider>().enabled = true;
 
-            if (interactables[0] == null)
-            {
-                interactables.Remove(interactables[0]);
-            }
+    //        if (interactables[0] == null)
+    //        {
+    //            interactables.Remove(interactables[0]);
+    //        }
 
-            interactables[0].GetComponent<Interactable>().OnInteract();
-        }
-    }
+    //        interactables[0].GetComponent<Interactable>().OnInteract();
+    //    }
+    //}
 
     private void HandlePlayerJump()
     {
@@ -267,49 +266,19 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Recovery Item"))
+        if (other.gameObject.GetComponent<PickupItem>())
         {
-            Debug.Log("Collected " + other.gameObject.tag + ": " + other.gameObject.name);
-
-            Destroy(other.gameObject);
-        }
-
-        if (other.gameObject.CompareTag("Powerup"))
-        {
-            Debug.Log("Collected " + other.gameObject.tag + ": " + other.gameObject.name);
-
-            Destroy(other.gameObject);
-        }
-
-        if (other.gameObject.CompareTag("Pickup Item"))
-        {
-            Debug.Log("Collected " + other.gameObject.tag + ": " + other.gameObject.name);
-
-            Destroy(other.gameObject);
-        }
-
-        if (other.gameObject.CompareTag("Treasure Item"))
-        {
-            Debug.Log("Collected " + other.gameObject.tag + ": " + other.gameObject.name);
-
-            Destroy(other.gameObject);
-        }
-
-        if (interactRadius)
-        {
-            if (!other.gameObject.GetComponent<Interactable>()) { return; }
-
-            interactables.Add(other.gameObject);
+            other.gameObject.GetComponent<PickupItem>().onPickup();
         }
     }
 
-    private void OnTriggerExit(Collider other)
-    {
-        if (interactRadius)
-        {
-            if (!other.gameObject.GetComponent<Interactable>()) { return; }
+    //private void OnTriggerExit(Collider other)
+    //{
+    //    if (interactRadius)
+    //    {
+    //        if (!other.gameObject.GetComponent<Interactable>()) { return; }
 
-            interactables.Remove(other.gameObject);
-        }
-    }
+    //        interactables.Remove(other.gameObject);
+    //    }
+    //}
 }
