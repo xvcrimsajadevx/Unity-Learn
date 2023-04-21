@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8240028977161081486}
   - component: {fileID: 8240028977161081489}
   - component: {fileID: 8240028977161081488}
+  - component: {fileID: 1267597055}
   m_Layer: 0
   m_Name: Bottle
   m_TagString: Powerup
@@ -98,3 +99,16 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
+--- !u!114 &1267597055
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8240028977161081490}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20ac84020d81e4449aa2e8276125851e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemType: 1

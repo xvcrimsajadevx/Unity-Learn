@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 7799337544475105507}
   - component: {fileID: 7799337544475105506}
   - component: {fileID: 7799337544475105533}
+  - component: {fileID: 2238200616687766810}
   m_Layer: 0
   m_Name: Bomb
-  m_TagString: Pickup Item
+  m_TagString: Inventory Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -26,7 +27,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7799337544475105535}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 6, y: 0.5, z: -18}
   m_LocalScale: {x: 0.5, y: 0.5000004, z: 0.5}
   m_ConstrainProportionsScale: 0
@@ -97,3 +98,16 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2238200616687766810
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7799337544475105535}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20ac84020d81e4449aa2e8276125851e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemType: 2

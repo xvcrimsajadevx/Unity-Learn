@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1504183793505549683}
   - component: {fileID: 1504183793505549680}
   - component: {fileID: 1504183793505549681}
+  - component: {fileID: 5815298391719269930}
   m_Layer: 0
   m_Name: Mana Potion
   m_TagString: Recovery Item
@@ -98,3 +99,16 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &5815298391719269930
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1504183793505549687}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20ac84020d81e4449aa2e8276125851e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemType: 0
