@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 3564789660672073016}
   - component: {fileID: 3564789660672073017}
   - component: {fileID: 3564789660672073018}
-  - component: {fileID: 3564789660672073015}
+  - component: {fileID: 5971339710535668453}
+  - component: {fileID: 220459443}
   m_Layer: 0
   m_Name: Bush
   m_TagString: Untagged
@@ -98,7 +99,7 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &3564789660672073015
+--- !u!114 &5971339710535668453
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -107,10 +108,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 3564789660672073020}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b04a2aeb9a499349b45522a6a7e75ea, type: 3}
+  m_Script: {fileID: 11500000, guid: f923302500def3743bd8bea9e28841c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isSwitch: 0
-  isBreakable: 1
-  isTrigger: 0
-  isOn: 0
+  health: 0
+--- !u!135 &220459443
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3564789660672073020}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 2
+  m_Center: {x: 0, y: 0, z: 0}
