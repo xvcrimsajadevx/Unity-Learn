@@ -1192,6 +1192,63 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 192916409}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1001 &197194659
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1230139857946873093, guid: edad63b44a491b6488a86e0108601bc5, type: 3}
+      propertyPath: m_Name
+      value: Pot
+      objectReference: {fileID: 0}
+    - target: {fileID: 1230139857946873094, guid: edad63b44a491b6488a86e0108601bc5, type: 3}
+      propertyPath: m_RootOrder
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 1230139857946873094, guid: edad63b44a491b6488a86e0108601bc5, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -4.85
+      objectReference: {fileID: 0}
+    - target: {fileID: 1230139857946873094, guid: edad63b44a491b6488a86e0108601bc5, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1230139857946873094, guid: edad63b44a491b6488a86e0108601bc5, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 9.35272
+      objectReference: {fileID: 0}
+    - target: {fileID: 1230139857946873094, guid: edad63b44a491b6488a86e0108601bc5, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1230139857946873094, guid: edad63b44a491b6488a86e0108601bc5, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1230139857946873094, guid: edad63b44a491b6488a86e0108601bc5, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1230139857946873094, guid: edad63b44a491b6488a86e0108601bc5, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1230139857946873094, guid: edad63b44a491b6488a86e0108601bc5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1230139857946873094, guid: edad63b44a491b6488a86e0108601bc5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1230139857946873094, guid: edad63b44a491b6488a86e0108601bc5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: edad63b44a491b6488a86e0108601bc5, type: 3}
 --- !u!1 &200288214
 GameObject:
   m_ObjectHideFlags: 0

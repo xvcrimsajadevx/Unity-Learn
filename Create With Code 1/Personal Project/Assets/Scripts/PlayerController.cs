@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
+using Unity.VisualScripting;
 using UnityEngine;
 
 
@@ -32,6 +34,7 @@ public class PlayerController : MonoBehaviour
     private bool canDash;
 
     public List<GameObject> interactables = new List<GameObject>();
+    public List<GameObject> targets = new List<GameObject>();
 
     // Start is called before the first frame update
     void Start()
@@ -59,11 +62,14 @@ public class PlayerController : MonoBehaviour
             HandlePlayerJump();
             HandleGroundSmash();
             HandlePlayerDash();
-            //HandlePlayerInteract();
+            HandlePlayerInteract();
+            HandlePlayerAttack();
         }
 
         KeepPlayerInBounds();
     }
+
+    
 
     // ================================== | Gameplay Methods | ================================== //
 
@@ -135,22 +141,35 @@ public class PlayerController : MonoBehaviour
         }   
     }
 
-    //private void HandlePlayerInteract()
-    //{
-    //    if (interactables.Count == 0) { return; }
+    private void HandlePlayerInteract()
+    {
+        if (interactables.Count > 0 && interactables[0] == null)
+        {
+            interactables.RemoveAt(0);
+        }
 
-    //    if (Input.GetKeyDown(KeyCode.Slash))
-    //    {
-    //        interactRadius.GetComponent<SphereCollider>().enabled = true;
+        if (interactables.Count == 0) { return; }
 
-    //        if (interactables[0] == null)
-    //        {
-    //            interactables.Remove(interactables[0]);
-    //        }
+        if (Input.GetKeyDown(KeyCode.Slash))
+        {
+            interactables[0].GetComponent<IInteract>().onInteract();
+        }
+    }
 
-    //        interactables[0].GetComponent<Interactable>().OnInteract();
-    //    }
-    //}
+    private void HandlePlayerAttack()
+    {
+        if (targets.Count > 0 && targets[0] == null)
+        {
+            targets.RemoveAt(0);
+        }
+
+        if (targets.Count == 0) { return; }
+
+        if (Input.GetKeyDown(KeyCode.Slash))
+        {
+            targets[0].GetComponent<Health>().onTakeDamage(0);
+        }
+    }
 
     private void HandlePlayerJump()
     {
@@ -230,6 +249,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+
         if (collision.gameObject.CompareTag("Ground"))
         {
             // Registers whether player is on ground and resets hasDoubleJumped bool
@@ -270,15 +290,52 @@ public class PlayerController : MonoBehaviour
         {
             other.gameObject.GetComponent<PickupItem>().onPickup();
         }
+
+        if (other.gameObject.GetComponent<Health>())
+        {
+            bool toAdd = true;
+
+            for (int i = 0; i < targets.Count; i++)
+            {
+                if (other.gameObject == targets[i].gameObject)
+                {
+                    toAdd = false;
+                }
+            }
+
+            if (toAdd)
+            {
+                targets.Add(other.gameObject);
+            }
+        }
+
+        if (other.gameObject.GetComponent<Interactive>())
+        {
+            bool toAdd = true;
+
+            for (int i = 0; i < interactables.Count; ++i)
+            {
+                if (other.gameObject == interactables[i].gameObject)
+                {
+                    toAdd = false;
+                }
+            }
+            
+            if (toAdd)
+            {
+                interactables.Add(other.gameObject);
+            }
+        }
     }
 
-    //private void OnTriggerExit(Collider other)
-    //{
-    //    if (interactRadius)
-    //    {
-    //        if (!other.gameObject.GetComponent<Interactable>()) { return; }
+    private void OnTriggerStay(Collider other)
+    {
+        
+    }
 
-    //        interactables.Remove(other.gameObject);
-    //    }
-    //}
+    private void OnTriggerExit(Collider other)
+    {
+        targets.Remove(other.gameObject);
+        interactables.Remove(other.gameObject);
+    }
 }
