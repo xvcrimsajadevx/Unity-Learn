@@ -69,8 +69,6 @@ public class PlayerController : MonoBehaviour
         KeepPlayerInBounds();
     }
 
-    
-
     // ================================== | Gameplay Methods | ================================== //
 
     private void MovePlayer(float horizontalInput, float verticalInput, Vector3 movement)
@@ -249,7 +247,6 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-
         if (collision.gameObject.CompareTag("Ground"))
         {
             // Registers whether player is on ground and resets hasDoubleJumped bool
