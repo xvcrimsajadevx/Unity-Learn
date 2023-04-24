@@ -8,8 +8,8 @@ public class SwitchController : MonoBehaviour
     [SerializeField] private SwitchMechanisms switchMechanisms;
     [SerializeField] private SwitchTargets switchTargets;
 
-    int activeOptionIndex;
-    public GameObject activeOption;
+    private int activeOptionIndex;
+    protected GameObject activeOption { get; private set; }
 
     // Start is called before the first frame update
     void Start()
@@ -32,12 +32,12 @@ public class SwitchController : MonoBehaviour
     {
         foreach (GameObject mechanism in switchMechanisms.mechanisms)
         {
-            if (mechanism.GetComponent<SwitchMechanism>().activeTarget != activeOption.name)
-            {
-                mechanism.GetComponent<SwitchMechanism>().activeTarget = activeOption.name;
+            mechanism.GetComponent<SwitchMechanism>().updateTarget(activeOption);
+        }
 
-                Debug.Log(mechanism.name + ": " + mechanism.GetComponent<SwitchMechanism>().activeTarget);
-            }
+        foreach (GameObject target in switchTargets.mechanisms)
+        {
+            target.GetComponent<SwitchTarget>().turnOnOff(activeOption);
         }
     }
 
