@@ -9,13 +9,8 @@ public class SwitchMechanism : Interactive, IInteract
     [SerializeField] private GameObject switchController;
     [SerializeField] private List<GameObject> switchOptions = new List<GameObject>();
 
-    public string activeTarget;
+    protected string activeTarget { get; private set; }
     private string activeSwitch;
-
-    private void Start()
-    {
-        //activeTarget = switchController.GetComponent<SwitchController>().activeOption.name;
-    }
 
     private void Update()
     {
@@ -44,6 +39,14 @@ public class SwitchMechanism : Interactive, IInteract
                     option.SetActive(false);
                 }
             }
+        }
+    }
+
+    public void updateTarget(GameObject activeOption)
+    {
+       if (activeTarget != activeOption.name)
+        {
+            activeTarget = activeOption.name;
         }
     }
 
