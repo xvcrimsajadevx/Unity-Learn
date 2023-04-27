@@ -165,7 +165,15 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Slash))
         {
-            targets[0].GetComponent<Health>().onTakeDamage(0);
+            if (targets[0].GetComponent<Health>())
+            {
+                targets[0].GetComponent<Health>().onTakeDamage(0);
+            }
+
+            if (targets[0].GetComponent<TriggerMechanism>())
+            {
+                targets[0].GetComponent<TriggerMechanism>().onHit();
+            }
         }
     }
 
@@ -288,7 +296,7 @@ public class PlayerController : MonoBehaviour
             other.gameObject.GetComponent<PickupItem>().onPickup();
         }
 
-        if (other.gameObject.GetComponent<Health>())
+        if (other.gameObject.GetComponent<Health>() || other.gameObject.GetComponent<TriggerMechanism>())
         {
             bool toAdd = true;
 
