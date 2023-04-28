@@ -29,4 +29,10 @@ public class TriggerMechanism : MonoBehaviour, IOnHit
             }
         }
     }
+    
+    public void updateMechanism(bool isOn)
+    {
+        switchOptions[0].gameObject.SetActive(isOn);
+        switchOptions[1].gameObject.SetActive(!isOn);
+    }
 }
