@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LightTorch : Interactive, IInteract
+public class LightTorch : Interactive
 {
 
     [SerializeField] private GameObject fireObject;
@@ -14,7 +14,7 @@ public class LightTorch : Interactive, IInteract
         fireObject.SetActive(fireLit);
     }
 
-    public void onInteract()
+    public override void OnInteract()
     {
         if (fireLit && staysLit) { return; }
 

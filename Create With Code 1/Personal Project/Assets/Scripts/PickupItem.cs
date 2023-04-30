@@ -15,7 +15,7 @@ public class PickupItem : MonoBehaviour, IPickup
 
     [SerializeField] ItemType itemType;
 
-    public void onPickup()
+    public void OnPickup()
     {
         Debug.Log("Collected " + itemType + ": " + gameObject.name);
 

@@ -1,4 +1,4 @@
 public interface IPickup
 {
-    void onPickup();
+    void OnPickup();
 }

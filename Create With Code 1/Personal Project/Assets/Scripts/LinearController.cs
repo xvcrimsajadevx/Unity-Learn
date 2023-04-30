@@ -19,7 +19,7 @@ public class LinearController : MechanismReciever
         }
     }
 
-    public override void onHit()
+    public override void OnHit()
     {
         activeObjectIndex++;
 
@@ -35,7 +35,7 @@ public class LinearController : MechanismReciever
     {
         foreach (GameObject mechanism in triggerMechanisms)
         {
-            mechanism.GetComponent<TriggerMechanism>().updateMechanism(activeObjectIndex);
+            mechanism.GetComponent<TriggerMechanism>().UpdateMechanism(activeObjectIndex);
         }
 
         foreach (GameObject mechanism in targetMechanisms)

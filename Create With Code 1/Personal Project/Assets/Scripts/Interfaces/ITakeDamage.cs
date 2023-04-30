@@ -1,4 +1,4 @@
 public interface ITakeDamage
 {
-    void onTakeDamage(int damage);
+    void OnTakeDamage(int damage);
 }
