@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class OpenChest : Interactive, IInteract
+public class OpenChest : Interactive
 {
     [SerializeField] private GameObject openState;
     [SerializeField] private GameObject closeState;
@@ -15,18 +15,18 @@ public class OpenChest : Interactive, IInteract
         closeState.SetActive(true);
     }
 
-    public void onInteract()
+    public override void OnInteract()
     {
         if (!isLocked)
         {
             openState.SetActive(true);
             closeState.SetActive(false);
 
-            StartCoroutine(deleteChest());
+            StartCoroutine(DeleteChest());
         }
     }
 
-    IEnumerator deleteChest()
+    IEnumerator DeleteChest()
     {
         yield return new WaitForSeconds(3f);
 

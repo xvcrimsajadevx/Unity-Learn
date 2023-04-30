@@ -13,7 +13,7 @@ public class SimpleController : MechanismReciever
         turnOnOff();
     }
 
-    public override void onHit()
+    public override void OnHit()
     {
         isOn = !isOn;
         turnOnOff();
@@ -23,7 +23,7 @@ public class SimpleController : MechanismReciever
     {
         foreach (GameObject mechanism in triggerMechanisms)
         {
-            mechanism.GetComponent<TriggerMechanism>().updateMechanism(isOn);
+            mechanism.GetComponent<TriggerMechanism>().UpdateMechanism(isOn);
         }
 
         foreach (GameObject mechanism in targetMechanisms)

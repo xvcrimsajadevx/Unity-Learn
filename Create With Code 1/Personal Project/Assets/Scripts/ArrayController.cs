@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class ArrayController : MonoBehaviour, ITurnOnOff
 {
-    [SerializeField] private List<GameObject> arrayItems = new List<GameObject>();
+    [SerializeField] private List<GameObject> arrayItems;
 
     [SerializeField] private bool isOn;
 
@@ -15,15 +15,15 @@ public class ArrayController : MonoBehaviour, ITurnOnOff
         {
             isOn = !isOn;
 
-            turnArrayOnOff();
+            TurnArrayOnOff();
         }
     }
 
-    private void turnArrayOnOff()
+    private void TurnArrayOnOff()
     {
         foreach (GameObject item in arrayItems)
         {
-            item.gameObject.GetComponent<TurnOnOff>().turnOnOff(isOn);
+            item.GetComponent<TurnOnOff>().turnOnOff(isOn);
         }
     }
 }

@@ -5,34 +5,34 @@ using UnityEngine;
 public class TriggerMechanism : MonoBehaviour, IOnHit
 {
     [SerializeField] private MechanismReciever controller;
-    [SerializeField] private List<GameObject> switchOptions = new List<GameObject>();
+    [SerializeField] private List<GameObject> switchOptions;
 
-    public void onHit()
+    public void OnHit()
     {
         if (Input.GetKeyDown(KeyCode.Slash))
         {
-            controller.GetComponent<MechanismReciever>().onHit();
+            controller.GetComponent<MechanismReciever>().OnHit();
         }
     }
 
-    public void updateMechanism(int activeIndex)
+    public void UpdateMechanism(int activeIndex)
     {
         foreach (GameObject option in switchOptions)
         {
             if (option.gameObject != switchOptions[activeIndex])
             {
-                option.gameObject.SetActive(false);
+                option.SetActive(false);
             }
             else
             {
-                option.gameObject.SetActive(true);
+                option.SetActive(true);
             }
         }
     }
     
-    public void updateMechanism(bool isOn)
+    public void UpdateMechanism(bool isOn)
     {
-        switchOptions[0].gameObject.SetActive(isOn);
-        switchOptions[1].gameObject.SetActive(!isOn);
+        switchOptions[0].SetActive(isOn);
+        switchOptions[1].SetActive(!isOn);
     }
 }

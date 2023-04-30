@@ -31,8 +31,8 @@ public class PlayerController : MonoBehaviour
     private int dashCount;
     private bool canDash;
 
-    public List<GameObject> interactables = new List<GameObject>();
-    public List<GameObject> targets = new List<GameObject>();
+    public List<GameObject> interactables;
+    public List<GameObject> targets;
 
     // Start is called before the first frame update
     void Start()
@@ -72,8 +72,8 @@ public class PlayerController : MonoBehaviour
     private void MovePlayer(float horizontalInput, float verticalInput, Vector3 movement)
     {
         // Moves player according to axis Input
-        transform.Translate(cameraFocus.transform.right * horizontalInput * Time.deltaTime * speed);
-        transform.Translate(cameraFocus.transform.forward * verticalInput * Time.deltaTime * speed);
+        transform.Translate(cameraFocus.transform.forward * verticalInput * speed * Time.deltaTime);
+        transform.Translate(cameraFocus.transform.right * horizontalInput * speed * Time.deltaTime);
 
         if (movement.magnitude > 0)
         {
@@ -148,7 +148,9 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Slash))
         {
-            interactables[0].GetComponent<IInteract>().onInteract();
+            if (interactables[0].GetComponent<PushPull>()) { return; }
+
+            interactables[0].GetComponent<IInteract>().OnInteract();
         }
     }
 
@@ -165,12 +167,12 @@ public class PlayerController : MonoBehaviour
         {
             if (targets[0].GetComponent<Health>())
             {
-                targets[0].GetComponent<Health>().onTakeDamage(0);
+                targets[0].GetComponent<Health>().OnTakeDamage(0);
             }
 
             if (targets[0].GetComponent<TriggerMechanism>())
             {
-                targets[0].GetComponent<TriggerMechanism>().onHit();
+                targets[0].GetComponent<TriggerMechanism>().OnHit();
             }
         }
     }
@@ -291,51 +293,42 @@ public class PlayerController : MonoBehaviour
     {
         if (other.gameObject.GetComponent<PickupItem>())
         {
-            other.gameObject.GetComponent<PickupItem>().onPickup();
+            other.gameObject.GetComponent<PickupItem>().OnPickup();
         }
 
         if (other.gameObject.GetComponent<Health>() || other.gameObject.GetComponent<TriggerMechanism>())
         {
-            bool toAdd = true;
-
-            for (int i = 0; i < targets.Count; i++)
-            {
-                if (other.gameObject == targets[i].gameObject)
-                {
-                    toAdd = false;
-                }
-            }
-
-            if (toAdd)
-            {
-                targets.Add(other.gameObject);
-            }
+            targets.Add(other.gameObject);
         }
 
         if (other.gameObject.GetComponent<Interactive>())
         {
-            bool toAdd = true;
+            interactables.Add(other.gameObject);
+        }
+    }
+    
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.GetComponent<PushPull>())
+        {
+            other.GetComponent<PushPull>().RotatePushPull(cameraFocus.transform);
 
-            for (int i = 0; i < interactables.Count; ++i)
+            if (other.gameObject == interactables[0])
             {
-                if (other.gameObject == interactables[i].gameObject)
+                if (Input.GetKey(KeyCode.Backslash))
                 {
-                    toAdd = false;
+                    other.transform.SetParent(gameObject.transform);
+
+                    playerRb.AddForceAtPosition(cameraFocus.transform.forward * 20, other.transform.position, ForceMode.Force);
                 }
-            }
-            
-            if (toAdd)
-            {
-                interactables.Add(other.gameObject);
+                else
+                {
+                    other.transform.SetParent(null);
+                }
             }
         }
     }
-
-    private void OnTriggerStay(Collider other)
-    {
-        
-    }
-
+    
     private void OnTriggerExit(Collider other)
     {
         targets.Remove(other.gameObject);

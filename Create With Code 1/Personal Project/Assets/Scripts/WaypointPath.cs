@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class WaypointPath : MonoBehaviour
 {
-    [SerializeField] private List<GameObject> waypointArray = new List<GameObject>();
+    [SerializeField] private List<GameObject> waypointArray;
 
     public Transform GetWaypoint(int waypointIndex)
     {

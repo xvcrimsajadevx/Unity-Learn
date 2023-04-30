@@ -1,4 +1,4 @@
 public interface IInteract
 {
-    void onInteract();
+    void OnInteract();
 }

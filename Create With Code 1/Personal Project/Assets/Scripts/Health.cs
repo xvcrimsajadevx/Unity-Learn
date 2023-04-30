@@ -7,7 +7,7 @@ public class Health : MonoBehaviour, ITakeDamage
 {
     [SerializeField] private int health;
 
-    public void onTakeDamage(int damage)
+    public void OnTakeDamage(int damage)
     {
         Destroy(gameObject);
     }

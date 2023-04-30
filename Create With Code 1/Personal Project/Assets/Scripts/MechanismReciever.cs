@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class MechanismReciever : MonoBehaviour, IOnHit
 {
-    [SerializeField] protected List<GameObject> targetMechanisms = new List<GameObject>();
-    [SerializeField] protected List<GameObject> triggerMechanisms = new List<GameObject>();
+    [SerializeField] protected List<GameObject> targetMechanisms;
+    [SerializeField] protected List<GameObject> triggerMechanisms;
 
-    public virtual void onHit() { }
+    public virtual void OnHit() { }
 
-    public virtual void onHit(GameObject activeTarget) { }
+    public virtual void OnHit(GameObject activeTarget) { }
 }

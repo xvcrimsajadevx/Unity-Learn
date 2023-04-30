@@ -15,13 +15,13 @@ public class TurnOnOff : MonoBehaviour, ITurnOnOff
         {
             isOn = !isOn;
 
-            updateDevice();
+            UpdateDevice();
         }
     }
 
-    private void updateDevice()
+    private void UpdateDevice()
     {
-        onState.gameObject.SetActive(isOn);
-        offState.gameObject.SetActive(!isOn);
+        onState.SetActive(isOn);
+        offState.SetActive(!isOn);
     }
 }
